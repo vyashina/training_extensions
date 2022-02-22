@@ -55,6 +55,7 @@ from ote_sdk.test_suite.training_tests_actions import (OTETestTrainingAction,
                                                        OTETestPotEvaluationAction,
                                                        OTETestNNCFAction,
                                                        OTETestNNCFEvaluationAction,
+                                                       #OTETestNNCFGraphAction,
                                                        OTETestNNCFExportAction,
                                                        OTETestNNCFExportEvaluationAction)
 
@@ -112,6 +113,7 @@ def get_anomaly_test_action_classes() -> List[Type[BaseOTETestAction]]:
         OTETestPotEvaluationAction,
         OTETestNNCFAction,
         OTETestNNCFEvaluationAction,
+        #OTETestNNCFGraphAction,
         OTETestNNCFExportAction,
         OTETestNNCFExportEvaluationAction,
     ]
@@ -130,7 +132,7 @@ class AnomalyDetectionTrainingTestParameters(DefaultOTETestCreationParametersInt
                        'ote_anomaly_classification_padim',
                        'ote_anomaly_classification_stfpm',
                     ],
-                    dataset_name='mvtec',
+                    dataset_name='mvtec_short',
                     usecase='precommit',
                 ),
                 dict(
@@ -298,6 +300,8 @@ class TestOTEReallifeAnomalyDetection(OTETrainingTestInterface):
         If the main parameters used for this test differs w.r.t. the previous test, a new instance of
         test case class will be created.
         """
+        print(f"!!!current_test_parameters_fx: {current_test_parameters_fx}")
+        print(f"!!!params_factories_for_test_actions_fx: {params_factories_for_test_actions_fx}")
         test_case = type(self).helper.get_test_case(current_test_parameters_fx,
                                                     params_factories_for_test_actions_fx)
         return test_case
